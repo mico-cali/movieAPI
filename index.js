@@ -1,6 +1,7 @@
 //Routes Middleware
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const movieRoutes = require("./routes/movie");
 const userRoutes = require("./routes/user");
@@ -11,6 +12,18 @@ const app = express()
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+const corsOptions = {
+    origin: [
+        "https://movieapi-4hoa.onrender.com",
+        "http://localhost:3000",
+    ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
 
 //MongoDB database
 mongoose.connect("mongodb+srv://mico_cali:pass123@cluster0.4ipfp.mongodb.net/movie-API?retryWrites=true&w=majority&appName=Cluster0");
